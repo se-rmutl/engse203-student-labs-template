@@ -63,7 +63,8 @@ npm run setup -- \
   --student-id 6501234567 \
   --name "สมชาย ใจดี" \
   --section SEC1 \
-  --github somchai-github
+  --github somchai-github \
+  --mode migration
 ```
 
 ตรวจไฟล์:
@@ -170,6 +171,7 @@ labs/week-01/evidence/
   "week": "week-01",
   "title": "Developer Environment & GitHub Repository Setup",
   "status": "ready",
+  "sourceOrigin": "migrated-repository",
   "originalRepoUrl": "https://github.com/<username>/<old-lab01-repo>",
   "originalCommit": "abc1234",
   "pullRequestUrl": "",
@@ -222,12 +224,10 @@ npm run import:source -- week-02 /absolute/path/to/engse203-lab02-old
 LAB 2 เป็น Vite project ให้แก้ `vite.config.js` ใน source ก่อน build:
 
 ```js
-const repositoryName = "engse203-student-labs-6501234567";
-
 export default defineConfig({
-  base: `/${repositoryName}/labs/week-02/`,
+  base: "./",
   build: {
-    outDir: "docs",
+    outDir: "dist",
     emptyOutDir: true,
   },
 });
@@ -244,13 +244,13 @@ npm --prefix labs/week-02/source run build
 นำ build output เข้า publish:
 
 ```bash
-npm run import:publish -- week-02 labs/week-02/source/docs
+npm run import:publish -- week-02 labs/week-02/source/dist
 ```
 
-ถ้าโครงงาน build ไป `dist/` ให้ใช้:
+ถ้าโครงงานเดิม build ไป folder อื่น ให้เปลี่ยน path ท้ายคำสั่งให้ตรง output ที่มี `index.html`
 
 ```bash
-npm run import:publish -- week-02 labs/week-02/source/dist
+npm run import:publish -- week-02 /path/to/actual-build-output
 ```
 
 แก้ `labs/week-02/lab-metadata.json` ให้มี original URL/commit, planned tag และ `testStatus: "pass"` แล้ว:
@@ -295,7 +295,7 @@ npm run import:publish -- week-03 labs/week-03/source
 npm --prefix labs/week-03/source install
 npm --prefix labs/week-03/source run check
 npm --prefix labs/week-03/source run build
-npm run import:publish -- week-03 labs/week-03/source/docs
+npm run import:publish -- week-03 labs/week-03/source/dist
 ```
 
 Manual test ขั้นต่ำ:
@@ -390,10 +390,13 @@ Definition of Done:
 | GitHub Username | somchai-github |
 | Repository URL | `https://github.com/.../engse203-student-labs-6501234567` |
 | Pages Hub URL | `https://...github.io/engse203-student-labs-6501234567/` |
+| LAB 01 Result URL | `https://...github.io/.../labs/week-01/` |
 | LAB 01 PR URL | `https://github.com/.../pull/1` |
 | LAB 01 Tag | `lab-01-submission-v1` |
+| LAB 02 Result URL | `https://...github.io/.../labs/week-02/` |
 | LAB 02 PR URL | `https://github.com/.../pull/2` |
 | LAB 02 Tag | `lab-02-submission-v1` |
+| LAB 03 Result URL | `https://...github.io/.../labs/week-03/` |
 | LAB 03 PR URL | `https://github.com/.../pull/3` |
 | LAB 03 Tag | `lab-03-submission-v1` |
 | Student Self-check | Complete |
@@ -444,4 +447,3 @@ Pages → docs/labs/week-04/
 | verify บอก originalCommit | ใช้ `git rev-parse HEAD` ใน repository เดิม |
 | มีไฟล์ใหญ่/จำนวนมาก | ตรวจว่าไม่ได้ copy `node_modules`, `.git`, `dist` หรือ build เก่า |
 | ต้องแก้งานหลังตรวจ | ใช้ branch `fix/week-NN-v2`, PR ใหม่ และ tag `lab-NN-submission-v2` |
-

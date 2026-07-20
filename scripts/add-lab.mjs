@@ -17,6 +17,7 @@ await writeJson(path.join(labRoot, "lab-metadata.json"), {
   week,
   title,
   status: "draft",
+  sourceOrigin: "course-starter",
   originalRepoUrl: "",
   originalCommit: "",
   pullRequestUrl: "",

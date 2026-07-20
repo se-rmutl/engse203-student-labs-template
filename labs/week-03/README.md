@@ -1,23 +1,33 @@
 # Week 03 — Responsive Web UI & Form Interaction
 
-## Source
+## รุ่นใหม่
+
+เปิด `lab/week-03` แล้วคัดลอก LAB03 starter จาก Course Repository เข้า `source/`
+
+```bash
+npm --prefix labs/week-03/source install
+npm --prefix labs/week-03/source run build
+npm run import:publish -- week-03 labs/week-03/source/dist
+```
+
+## รุ่นปัจจุบันที่มี repo เดิม
 
 ```bash
 npm run import:source -- week-03 /path/to/old-lab03
 ```
 
-ถ้าเป็น static site และ `index.html` อยู่ที่ source root:
+ถ้าเป็น static site:
 
 ```bash
 npm run import:publish -- week-03 labs/week-03/source
 ```
 
-ถ้ามี build command ให้รันทดสอบ/build ของโครงงานเดิมก่อน แล้วนำเฉพาะ output ที่มี `index.html` เข้า `publish/`
+ตั้ง `sourceOrigin: "migrated-repository"` และบันทึก Original URL/Commit
 
 ## Manual Test
 
-- Desktop และ Mobile 375px
-- Form validation
+- Desktop และ mobile 375px
+- Form invalid/valid
 - Event interaction
 - Console ไม่มี error
-- Asset paths เป็น relative หรือถูกต้องสำหรับ Pages subpath
+- Asset paths ใช้ relative path
